@@ -1,36 +1,62 @@
 {% extends 'base.html' %}
 
 {% block content %}
+<!doctype html>
+<html lang="en">
+    <body class="bg-navs">
+        {% for message in get_flashed_messages() %}
 
-{% for message in get_flashed_messages() %}
+            <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                {{ message }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
 
-    <div class="alert alert-warning alert-dismissible fade show" role="alert">
-        {{ message }}
-        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-    </div>
+        {% endfor %}
 
-{% endfor %}
+        {% if name %}
+            <h1>Hello {{ name }}!!</h1>
+            <br/><br/>
+            <table class="table table-hover table-bordered table-striped">
+                {% for our_users in our_users %}
+                    <tr>
+                        <td>{{ our_users.id}}. {{ our_users.name }} {{ our_users.email}}</td>
+                    </tr>
+                {% endfor %}
 
-{% if name %}
-    <h1>Hello {{ name }}!!</h1>
-    <br/>
-    <img src="{{ url_for('static', filename='images/Ipon.jpg') }}" width="1300" height="500">
+            </table> 
+            
 
 
-{% else %}
-    <h1>Go-op Registration.</h1>
-    <br/>
-    <form method="POST">
-        {{ form.hidden_tag() }} 
-        
-        {{ form.name.label(class="form-label") }}
+        {% else %}
+            <h1>Go-Operatiba Registration:</h1>
+            <br/>
+            <form method="POST">
+                {{ form.hidden_tag() }} 
+                
+                {{ form.name.label(class="form-label") }}
 
-        {{form.name(class="form-control") }}
-        <br/>
+                {{form.name(class="form-control") }}
+                <br/>
 
-        {{ form.submit(class="btn btn-secondary") }}
-    </form>
+                {{ form.email.label(class="form-label") }}
 
-{% endif %}
+                {{form.email(class="form-control") }}
+                <br/>
+                
+                {{ form.submit(class="btn btn-secondary") }}
+            </form>
+            <br/><br/>
+            <table class="table table-hover table-bordered table-striped">
+                {% for our_users in our_users %}
+                    <tr>
+                        <td>{{ our_users.id}}. {{ our_users.name }} {{ our_users.email}}</td>
+                    </tr>
+                {% endfor %}
+
+            </table>   
+
+        {% endif %}
+    </body>
+</html>
 
 {% endblock %}

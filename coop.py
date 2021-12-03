@@ -11,7 +11,11 @@ from datetime import datetime
 #Create a flask instance
 app = Flask(__name__)
 #Add database
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///users.db'
+#OLD SQL DB
+#app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///users.db'
+
+#New MYSQL DB
+app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://root:password12345Apm!@localhost/our_users'
 #Secret Key!
 app.config['SECRET_KEY'] = "Goop123"
 
